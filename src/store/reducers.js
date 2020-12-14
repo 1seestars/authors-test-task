@@ -4,10 +4,10 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
 
 export const rootReducer = combineReducers({
-    posts: postReducer,
+  posts: postReducer
 })
 
 export const store = createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk))
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
 )

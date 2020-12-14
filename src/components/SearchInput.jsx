@@ -2,6 +2,9 @@ import React from 'react'
 import { findString } from '../store/posts/actions'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import searchIcon from '../images/search.png'
+import { Block } from '../styled/Block'
+import { Image } from '../styled/Image'
 
 const Input = styled.input`
   border: none;
@@ -21,10 +24,13 @@ const Input = styled.input`
 `
 
 const SearchInput = ({ findString }) => (
-  <Input
-    placeholder={'Поиск авторов по имени'}
-    onChange={(e) => findString(e.target.value.trim())}
-  />
+  <Block borderRadius={'10px 10px 0 0'}>
+    <Image src={searchIcon} alt={'Search'} title={'Search'} />
+    <Input
+      placeholder={'Поиск авторов по имени'}
+      onChange={(e) => findString(e.target.value.trim())}
+    />
+  </Block>
 )
 
 const mapDispatchToProps = {
