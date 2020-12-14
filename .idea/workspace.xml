@@ -2,23 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbbf6965-a219-4890-9e52-c918540e602c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/SearchInput.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/svgComponents/GoldMedal.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/posts/actions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/posts/reducer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/reducers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/logo.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reportWebVitals.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/setupTests.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/svgComponents/GoldMedal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/medals/1st.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/medals/2nd.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/medals/3rd.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +56,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607888876620</updated>
       <workItem from="1607888878874" duration="15320000" />
-      <workItem from="1607943180786" duration="13118000" />
+      <workItem from="1607943180786" duration="14989000" />
     </task>
     <servers />
   </component>

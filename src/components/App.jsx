@@ -10,6 +10,9 @@ import {
 } from '../store/posts/actions'
 import styled from 'styled-components'
 import searchIcon from '../images/search.png'
+import firstPlaceMedal from '../images/medals/1st.png'
+import secondPlaceMedal from '../images/medals/2nd.png'
+import thirdPlaceMedal from '../images/medals/3rd.png'
 
 const MainContainer = styled.div`
   max-width: 90%;
@@ -49,7 +52,7 @@ const PostContainer = styled.li`
 `
 
 const Image = styled.img`
-  max-height: 20px;
+  max-height: ${(props) => (props.maxHeight ? props.maxHeight : '20px')};
   margin-right: 20px;
 `
 
@@ -204,7 +207,33 @@ const App = ({
                       </CountPub>
                     </AuthorInfoContainer>
                   </AuthorContainer>
-                  <div>{post.reward && post.reward}</div>
+                  <div>
+                    {post.reward === 'gold' && (
+                      <Image
+                        src={firstPlaceMedal}
+                        alt={'Gold'}
+                        title={'Gold'}
+                        maxHeight={'50px'}
+                      />
+                    )}
+                    {post.reward === 'silver' && (
+                      <Image
+                        src={secondPlaceMedal}
+                        alt={'Silver'}
+                        title={'Silver'}
+                        maxHeight={'50px'}
+                      />
+                    )}
+                    {post.reward === 'bronze' && (
+                      <Image
+                        src={thirdPlaceMedal}
+                        alt={'Bronze'}
+                        title={'Bronze'}
+                        maxHeight={'50px'}
+                      />
+                    )}
+                  </div>
+
                   <Pageviews>{post.pageviews}</Pageviews>
                 </PostContainer>
               )
