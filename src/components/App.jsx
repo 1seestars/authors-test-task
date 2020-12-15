@@ -14,9 +14,8 @@ const MainContainer = styled.div`
 `
 
 const App = ({ getPostsFromServer }) => {
-  useEffect(() => {
-    getPostsFromServer()
-  }, [getPostsFromServer])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(getPostsFromServer, [])
 
   return (
     <MainContainer>

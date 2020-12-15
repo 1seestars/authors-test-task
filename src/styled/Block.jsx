@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Block = styled.div`
   display: flex;
   padding: 0 20px;
-  justify-content: ${(props) => props.justifyContent && props.justifyContent};
+  justify-content: ${({ justifyContent }) => justifyContent && justifyContent};
   align-items: center;
   background: #ebeef4;
-  border-radius: ${(props) => props.borderRadius && props.borderRadius};
-  height: ${(props) => (props.height ? props.height : '80px')};
+  border-radius: ${({ borderRadius }) => borderRadius && borderRadius};
+  height: ${({ height }) => (height ? height : '80px')};
 `

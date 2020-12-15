@@ -10,23 +10,27 @@ const PostList = styled.ul`
   margin: 0;
 `
 
-const PostListComponent = ({ posts, postsOnPage, currentPage }) => (
-  <PostList>
-    {posts.length ? (
-      posts.map((post, index) => {
-        if (
-          index + 1 > postsOnPage * (currentPage - 1) &&
-          index + 1 <= postsOnPage * currentPage
-        ) {
-          return <Post key={index} post={post} index={index} />
-        }
-        return null
-      })
-    ) : (
-      <PostContainer>Авторов не найдено...</PostContainer>
-    )}
-  </PostList>
-)
+const PostListComponent = ({ posts, postsOnPage, currentPage }) => {
+  const shownPosts = posts.map((post, index) => {
+    if (
+      index + 1 > postsOnPage * (currentPage - 1) &&
+      index + 1 <= postsOnPage * currentPage
+    ) {
+      return <Post key={index} post={post} index={index} />
+    }
+    return null
+  })
+
+  return (
+    <PostList>
+      {posts.length ? (
+        shownPosts
+      ) : (
+        <PostContainer>Авторов не найдено...</PostContainer>
+      )}
+    </PostList>
+  )
+}
 
 const mapStateToProps = ({ posts }) => ({
   posts: posts.shownPosts,

@@ -18,12 +18,12 @@ const PageButton = styled.button`
   transition: 0.3s transform;
   opacity: 0.7;
   outline: none;
-  visibility: ${(props) => props.visibility && props.visibility};
+  visibility: ${({ visibility }) => visibility && visibility};
   &:hover {
     opacity: 1;
   }
   &:active {
-    transform: ${(props) => props.translate && props.translate};
+    transform: ${({ translate }) => translate && translate};
   }
 `
 
@@ -34,15 +34,11 @@ const ChangePageButtons = ({
   previousPage,
   nextPage
 }) => {
-  const showPages = () => {
-    const start = postsOnPage * (currentPage - 1) + 1
-    const end =
-      postsOnPage * currentPage < posts.length
-        ? postsOnPage * currentPage
-        : posts.length
-
-    return start < end ? `${start} - ${end}` : `${end}`
-  }
+  const start = postsOnPage * (currentPage - 1) + 1
+  const end =
+    postsOnPage * currentPage < posts.length
+      ? postsOnPage * currentPage
+      : posts.length
 
   return (
     <PageButtonBlock>
@@ -53,7 +49,7 @@ const ChangePageButtons = ({
       >
         ᐸ
       </PageButton>
-      {showPages()}
+      {start < end ? `${start} - ${end}` : `${end}`}
       <PageButton
         onClick={nextPage}
         translate={'translate(10px)'}

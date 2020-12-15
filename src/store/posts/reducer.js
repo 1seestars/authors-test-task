@@ -3,14 +3,27 @@ import {
   NEXT_PAGE,
   PREVIOUS_PAGE,
   SET_POSTS,
-  SORT_BY_NAME,
-  SORT_BY_PAGEVIEWS
+  SORT_COLUMN
 } from './actions.js'
+import { avatarColorGenerator } from '../../utils/avatarBackgroundGenerator'
+import { arraySorter } from '../../utils/arraySorter'
+
+export const GOLD = 'GOLD'
+export const SILVER = 'SILVER'
+export const BRONZE = 'BRONZE'
+export const NONE = 'NONE'
+
+const asc = 'asc'
+const desc = 'desc'
 
 const initialState = {
   posts: [],
   shownPosts: [],
-  sortedBy: 'default',
+  sorting: {
+    sortedBy: '',
+    // possible values for sortOrder: asc / desc
+    sortOrder: ''
+  },
   postsOnPage: 10,
   currentPage: 1
 }
@@ -18,21 +31,31 @@ const initialState = {
 export const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_POSTS:
-      const avatarColorGenerator = () => {
-        const x = Math.floor(Math.random() * 256)
-        const y = Math.floor(Math.random() * 256)
-        const z = Math.floor(Math.random() * 256)
-        const BgColor = 'rgba(' + x + ',' + y + ',' + z + ',0.7)'
-        return BgColor
-      }
+      const sortedArr = [...action.payload].sort(
+        (a, b) => b.pageviews - a.pageviews
+      )
+
+      const freshPosts = action.payload.map((post) => {
+        let reward = NONE
+        if (post.pageviews === sortedArr[0].pageviews) {
+          reward = GOLD
+        } else if (post.pageviews === sortedArr[1].pageviews) {
+          reward = SILVER
+        } else if (post.pageviews === sortedArr[2].pageviews) {
+          reward = BRONZE
+        }
+
+        return {
+          ...post,
+          background: avatarColorGenerator(),
+          reward
+        }
+      })
 
       return {
         ...state,
-        posts: action.payload.map((post) => {
-          post.background = avatarColorGenerator()
-          return post
-        }),
-        shownPosts: action.payload
+        posts: freshPosts,
+        shownPosts: freshPosts
       }
     case FIND_STRING:
       return {
@@ -42,58 +65,23 @@ export const postReducer = (state = initialState, action) => {
           post.name.toLowerCase().includes(action.payload.toLowerCase())
         )
       }
-    case SORT_BY_NAME:
-      if (state.sortedBy === 'nameDown') {
-        return {
-          ...state,
-          shownPosts: [
-            ...state.shownPosts.sort((a, b) => b.pageviews - a.pageviews)
-          ],
-          sortedBy: 'default'
-        }
-      } else if (state.sortedBy === 'nameUp') {
-        return {
-          ...state,
-          shownPosts: [
-            ...state.shownPosts.sort((a, b) => {
-              if (a.name > b.name) return -1
-              if (a.name < b.name) return 1
-              return 0
-            })
-          ],
-          sortedBy: 'nameDown'
-        }
-      } else {
-        return {
-          ...state,
-          shownPosts: [
-            ...state.shownPosts.sort((a, b) => {
-              if (a.name > b.name) return 1
-              if (a.name < b.name) return -1
-              return 0
-            })
-          ],
-          sortedBy: 'nameUp'
+    case SORT_COLUMN:
+      let order = asc
+      if (action.payload === state.sorting.sortedBy) {
+        if (state.sorting.sortOrder === asc) {
+          order = desc
         }
       }
-    case SORT_BY_PAGEVIEWS:
-      if (state.sortedBy === 'pageviewsUp') {
-        return {
-          ...state,
-          shownPosts: [
-            ...state.shownPosts.sort((a, b) => b.pageviews - a.pageviews)
-          ],
-          sortedBy: 'default'
-        }
-      } else {
-        return {
-          ...state,
-          shownPosts: [
-            ...state.shownPosts.sort((a, b) => a.pageviews - b.pageviews)
-          ],
-          sortedBy: 'pageviewsUp'
-        }
+
+      return {
+        ...state,
+        sorting: {
+          sortedBy: action.payload,
+          sortOrder: order
+        },
+        shownPosts: arraySorter(action.payload, order, state.shownPosts)
       }
+
     case PREVIOUS_PAGE:
       return {
         ...state,

@@ -1,8 +1,11 @@
 import React from 'react'
 import { Block } from '../styled/Block'
 import styled from 'styled-components'
-import { sortByName, sortByPageviews } from '../store/posts/actions'
+import { sortColumn } from '../store/posts/actions'
 import { connect } from 'react-redux'
+
+const name = 'name'
+const pageviews = 'pageviews'
 
 const SortButton = styled.button`
   border: none;
@@ -14,38 +17,38 @@ const SortButton = styled.button`
   padding-top: 0;
 `
 
-const SortButtons = ({ sortedBy, sortByName, sortByPageviews }) => {
-  const nameSortBtn = {
-    default: '↕',
-    nameUp: '↑',
-    nameDown: '↓',
-    pageviewsUp: '↕'
-  }
-
-  const pageviewsSortBtn = {
-    default: '↓',
-    pageviewsUp: '↑',
-    nameUp: '↓',
-    nameDown: '↓'
+const SortButtons = ({ sortedBy, sortOrder, sortColumn }) => {
+  const sortBtnSign = (sorted, order, field) => {
+    const sign = {
+      '': '↕',
+      asc: '↑',
+      desc: '↓'
+    }
+    if (field === sorted) {
+      return sign[order]
+    }
+    return '↕'
   }
 
   return (
     <Block height={'40px'} justifyContent={'space-between'}>
-      <SortButton onClick={sortByName}>{nameSortBtn[sortedBy]}</SortButton>
-      <SortButton onClick={sortByPageviews}>
-        {pageviewsSortBtn[sortedBy]}
+      <SortButton onClick={() => sortColumn(name)}>
+        {sortBtnSign(sortedBy, sortOrder, name)}
+      </SortButton>
+      <SortButton onClick={() => sortColumn(pageviews)}>
+        {sortBtnSign(sortedBy, sortOrder, pageviews)}
       </SortButton>
     </Block>
   )
 }
 
 const mapStateToProps = ({ posts }) => ({
-  sortedBy: posts.sortedBy
+  sortedBy: posts.sorting.sortedBy,
+  sortOrder: posts.sorting.sortOrder
 })
 
 const mapDispatchToProps = {
-  sortByName,
-  sortByPageviews
+  sortColumn
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SortButtons)

@@ -5,6 +5,7 @@ import thirdPlaceMedal from '../images/medals/3rd.png'
 import styled from 'styled-components'
 import { Image } from '../styled/Image'
 import { PostContainer } from '../styled/PostContainer'
+import { BRONZE, GOLD, SILVER } from '../store/posts/reducer'
 
 const AuthorContainer = styled.div`
   display: flex;
@@ -22,7 +23,7 @@ const AuthorAvatar = styled.div`
   display: flex;
   width: 40px;
   height: 40px;
-  background: ${(props) => props.background && props.background};
+  background: ${({ background }) => background && background};
   justify-content: center;
   align-items: center;
   margin: 0 10px;
@@ -44,7 +45,7 @@ const AuthorName = styled.div`
 
 const CountPub = styled.div`
   color: #999;
-  opacity: ${(props) => props.opacity && props.opacity};
+  opacity: ${({ opacity }) => opacity && opacity};
 `
 
 const Pageviews = styled.div`
@@ -64,27 +65,27 @@ const Post = ({ post, index }) => (
       </AuthorInfoContainer>
     </AuthorContainer>
     <div>
-      {post.reward === 'gold' && (
+      {post.reward === GOLD && (
         <Image
           src={firstPlaceMedal}
-          alt={'Gold'}
-          title={'Gold'}
+          alt={GOLD}
+          title={GOLD}
           maxHeight={'50px'}
         />
       )}
-      {post.reward === 'silver' && (
+      {post.reward === SILVER && (
         <Image
           src={secondPlaceMedal}
-          alt={'Silver'}
-          title={'Silver'}
+          alt={SILVER}
+          title={SILVER}
           maxHeight={'50px'}
         />
       )}
-      {post.reward === 'bronze' && (
+      {post.reward === BRONZE && (
         <Image
           src={thirdPlaceMedal}
-          alt={'Bronze'}
-          title={'Bronze'}
+          alt={BRONZE}
+          title={BRONZE}
           maxHeight={'50px'}
         />
       )}
