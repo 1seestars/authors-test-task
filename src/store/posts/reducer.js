@@ -66,12 +66,7 @@ export const postReducer = (state = initialState, action) => {
         )
       }
     case SORT_COLUMN:
-      let order = asc
-      if (action.payload === state.sorting.sortedBy) {
-        if (state.sorting.sortOrder === asc) {
-          order = desc
-        }
-      }
+      const order = action.payload === state.sorting.sortedBy && state.sorting.sortOrder === asc ? desc : asc
 
       return {
         ...state,
